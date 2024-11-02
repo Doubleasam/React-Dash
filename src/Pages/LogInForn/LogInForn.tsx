@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import app from "../../Firebase/Firebase.ini";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const LogInForn = () => {
+  const navigate = useNavigate();
   const auth = getAuth(app);
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const LogInForn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result);
+        navigate("/");
       })
       .catch((error) => {
         console.log("error", error.message);
