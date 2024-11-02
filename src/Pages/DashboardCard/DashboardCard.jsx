@@ -1,7 +1,28 @@
+/* eslint-disable react/no-unescaped-entities */
+import { useGetProductsQuery } from "../../redux/redux";
 import Depertment from "../Depertment/Depertment";
 import Navbar from "../Navbar/Navbar";
 
 const DashboardCard = () => {
+  const { data: products, isError, isLoading } = useGetProductsQuery([]);
+  console.log(products);
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <h2>Loading...</h2>
+      </div>
+    );
+  }
+  if (!isLoading && !isError && products?.length === 0) {
+    return (
+      <div className="text-center p-20 ">
+        <h2 className="text-lg font-semibold">
+          Can't find any products please reload the page and find products
+        </h2>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -11,73 +32,24 @@ const DashboardCard = () => {
         </h2>
 
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-4 mt-8">
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[#8ECF4D] font-medium">
-              <span>+6%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">43</h2>
-              <p className="font-medium text-[#262626]/60">New Tickets</p>
+          {products?.map((product) => (
+            <div key={product.persen}>
+              <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
+                <p className="right-4 top-4 absolute text-[#8ECF4D] font-medium">
+                  <span>+6%</span>
+                  <span></span>
+                </p>
+                <div>
+                  <h2 className="text-2xl font-semibold text-[#262626]/80">
+                    {product.total}
+                  </h2>
+                  <p className="font-medium text-[#262626]/60">
+                    {product.title}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[red] font-medium">
-              <span>-3%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">17</h2>
-              <p className="font-medium text-[#262626]/60">Closes Today</p>
-            </div>
-          </div>
-
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[#8ECF4D] font-medium">
-              <span>+9%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">7</h2>
-              <p className="font-medium text-[#262626]/60">New Replies</p>
-            </div>
-          </div>
-
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[#8ECF4D] font-medium">
-              <span>+3%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">
-                27.3K
-              </h2>
-              <p className="font-medium text-[#262626]/60">Followers</p>
-            </div>
-          </div>
-
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[red] font-medium">
-              <span>-2%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">$95</h2>
-              <p className="font-medium text-[#262626]/60">Daily Earming</p>
-            </div>
-          </div>
-
-          <div className="border rounded shadow-md flex items-center justify-center text-center flex-col relative py-8">
-            <p className="right-4 top-4 absolute text-[red] font-medium">
-              <span>-1%</span>
-              <span></span>
-            </p>
-            <div>
-              <h2 className="text-2xl font-semibold text-[#262626]/80">621</h2>
-              <p className="font-medium text-[#262626]/60">Products</p>
-            </div>
-          </div>
+          ))}
         </div>
 
         <div>
