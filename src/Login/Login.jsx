@@ -4,7 +4,10 @@ import { useState } from "react";
 import LogInForn from "../Pages/LogInForn/LogInForn";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { is_logged_in } from "../redux/actions";
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
@@ -17,6 +20,7 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         navigate("/");
+        dispatch(is_logged_in())
         console.log(loggedUser);
         setUser(loggedUser);
       })

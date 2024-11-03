@@ -1,5 +1,18 @@
+import { useEffect } from "react";
 import user from "../../assets/images/user.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { get_data } from "../../redux/actions/index";
+
 const DepertmentActivites = () => {
+  const user_data = useSelector((state) => state.user_reducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(get_data());
+
+    return () => {};
+  }, [dispatch]);
+
   return (
     <div className="border shadow-md py-4">
       <h2 className="border-b pb-4 px-4 text-lg font-semibold text-[#262626]/70">
@@ -19,59 +32,26 @@ const DepertmentActivites = () => {
             <p>DATE</p>
           </div>
 
-          <div className="grid lg:grid-cols-3 px-4 border-b pb-4 mt-4">
-            <div className="flex gap-4 items-center">
-              <img className="w-[35px]" src={user} alt="" />
-              <h2 className="font-semibold text-[#262626]/70">
-                Ronald Bradley
-              </h2>
-            </div>
+          {user_data?.data?.user?.map((val, ind) => (
+            <div
+              key={ind}
+              className="grid lg:grid-cols-3 px-4 border-b pb-4 mt-4"
+            >
+              <div className="flex gap-4 items-center">
+                <img className="w-[35px]" src={user} alt="" />
+                <h2 className="font-semibold text-[#262626]/70">{val?.name}</h2>
+              </div>
 
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <h2>Inital commit</h2>
-            </div>
+              <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
+                <h2>{val?.commit}</h2>
+              </div>
 
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <p>May 6,2018</p>
-              <p>Delete</p>
+              <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
+                <p>{val?.date}</p>
+                <p>Delete</p>
+              </div>
             </div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 px-4 border-b pb-4 mt-4">
-            <div className="flex gap-4 items-center">
-              <img className="w-[35px]" src={user} alt="" />
-              <h2 className="font-semibold text-[#262626]/70">
-                Ronald Bradley
-              </h2>
-            </div>
-
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <h2>Inital commit</h2>
-            </div>
-
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <p>May 6,2018</p>
-              <p>Delete</p>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-3 px-4 border-b pb-4 mt-4">
-            <div className="flex gap-4 items-center">
-              <img className="w-[35px]" src={user} alt="" />
-              <h2 className="font-semibold text-[#262626]/70">
-                Ronald Bradley
-              </h2>
-            </div>
-
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <h2>Inital commit</h2>
-            </div>
-
-            <div className="flex gap-4 items-center font-semibold text-[#262626]/70">
-              <p>May 6,2018</p>
-              <p>Delete</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
