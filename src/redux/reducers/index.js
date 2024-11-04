@@ -9,7 +9,7 @@ import {
 
 const default_state = {
   data: {},
-  user_email: "",
+  user_email: "samuel@gmail.com",
   is_logged_in: false,
   is_loading: false,
   error: null,
