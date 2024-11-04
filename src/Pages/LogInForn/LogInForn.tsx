@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import app from "../../Firebase/Firebase.ini";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { is_logged_in } from "../../redux/actions";
+import { is_logged_in, set_email } from "../../redux/actions";
 
 const LogInForn = () => {
   // type RootState = ReturnType<typeof store.getState>
@@ -23,6 +23,7 @@ const LogInForn = () => {
       .then((result) => {
         console.log(result);
         dispatch(is_logged_in());
+        dispatch(set_email(email));
         navigate("/");
       })
       .catch((error) => {
