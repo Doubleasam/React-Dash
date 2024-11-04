@@ -5,7 +5,7 @@ import LogInForn from "../Pages/LogInForn/LogInForn";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { is_logged_in } from "../redux/actions";
+import { is_logged_in, set_email } from "../redux/actions";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,12 +19,11 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const loggedUser = result.user;
-        dispatch(is_logged_in());
-        console.log("loggedUser: ", loggedUser);
-        console.log("loggedUser?.email: ", loggedUser?.br?.email);
-        dispatch(set_email(loggedUser?.br?.email));
+        navigate("/");
+        dispatch(is_logged_in())
+        dispatch(set_email(loggedUser?.email))
+        console.log(loggedUser);
         setUser(loggedUser);
-        // navigate("/");
       })
       .catch((error) => {
         console.log("error", error.message);
