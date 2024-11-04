@@ -1,10 +1,15 @@
 import { useSelector } from "react-redux";
 import Depertment from "../Depertment/Depertment";
 import Navbar from "../Navbar/Navbar";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const DashboardCard = () => {
   const user_data = useSelector((state) => state.user_reducer);
+  const navigate = useNavigate();
+
+  if (user_data?.is_logged_in === false) {
+    navigate("/login");
+  }
 
   return (
     <div>

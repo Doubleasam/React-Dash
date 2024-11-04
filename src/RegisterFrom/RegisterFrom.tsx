@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import app from "../Firebase/Firebase.ini";
 import { useDispatch } from "react-redux";
-import { is_logged_in } from "../redux/actions";
+import { is_logged_in, set_email } from "../redux/actions";
 
 const RegisterFrom = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const RegisterFrom = () => {
       .then((result) => {
         console.log(result);
         dispatch(is_logged_in());
+        dispatch(set_email(email));
         navigate("/");
       })
       .catch((error) => {

@@ -52,15 +52,8 @@ const Header = () => {
                 Log In
               </Link>
             ) : (
-              <div
-                onClick={() =>
-                  setTimeout(() => {
-                    dispatch(is_logged_out());
-                  }, 1000)
-                }
-                className="px-6 hover:bg-[#262626]/90 duration-300 cursor-pointer py-2 rounded bg-[#ef3271] text-[#fff] text-sm font-semibold"
-              >
-                Log Out
+              <div className="px-6 hover:bg-[#262626]/90 duration-300 cursor-pointer py-2 rounded bg-[#3289EF] text-[#fff] text-sm font-semibold">
+                {user_status?.user_email}
               </div>
             )}
           </div>
