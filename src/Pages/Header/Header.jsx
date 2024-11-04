@@ -2,7 +2,13 @@ import { IoIosArrowForward } from "react-icons/io";
 import { LuBell } from "react-icons/lu";
 
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { is_logged_out } from "../../redux/actions";
+
 const Header = () => {
+  const user_status = useSelector((state) => state.user_reducer);
+  const dispatch = useDispatch();
+
   return (
     <div className="lg:px-20 md:px-16 px-12 py-4">
       <div className="flex items-center justify-between">
@@ -38,12 +44,25 @@ const Header = () => {
           </div> */}
 
           <div>
-            <Link
-              to="/login"
-              className="px-6 hover:bg-[#262626]/90 duration-300 cursor-pointer py-2 rounded bg-[#3289EF] text-[#fff] text-sm font-semibold"
-            >
-              Log In
-            </Link>
+            {user_status?.is_logged_in === false ? (
+              <Link
+                to="/login"
+                className="px-6 hover:bg-[#262626]/90 duration-300 cursor-pointer py-2 rounded bg-[#3289EF] text-[#fff] text-sm font-semibold"
+              >
+                Log In
+              </Link>
+            ) : (
+              <div
+                onClick={() =>
+                  setTimeout(() => {
+                    dispatch(is_logged_out());
+                  }, 1000)
+                }
+                className="px-6 hover:bg-[#262626]/90 duration-300 cursor-pointer py-2 rounded bg-[#ef3271] text-[#fff] text-sm font-semibold"
+              >
+                Log Out
+              </div>
+            )}
           </div>
         </div>
       </div>

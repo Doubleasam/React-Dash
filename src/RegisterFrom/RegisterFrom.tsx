@@ -2,8 +2,12 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import app from "../Firebase/Firebase.ini";
+import { useDispatch } from "react-redux";
+import { is_logged_in } from "../redux/actions";
 
 const RegisterFrom = () => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const auth = getAuth(app);
   const handleRegister = (e) => {
@@ -14,6 +18,7 @@ const RegisterFrom = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result);
+        dispatch(is_logged_in());
         navigate("/");
       })
       .catch((error) => {
