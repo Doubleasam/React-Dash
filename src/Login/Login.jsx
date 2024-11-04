@@ -19,12 +19,12 @@ const Login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const loggedUser = result.user;
-        navigate("/");
         dispatch(is_logged_in());
         console.log("loggedUser: ", loggedUser);
-        console.log("loggedUser?.email: ", loggedUser?.email);
-        dispatch(set_email(loggedUser?.email));
+        console.log("loggedUser?.email: ", loggedUser?.br?.email);
+        dispatch(set_email(loggedUser?.br?.email));
         setUser(loggedUser);
+        navigate("/");
       })
       .catch((error) => {
         console.log("error", error.message);
