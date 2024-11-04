@@ -24,7 +24,7 @@ const Login = () => {
         console.log("loggedUser?.email: ", loggedUser?.br?.email);
         dispatch(set_email(loggedUser?.br?.email));
         setUser(loggedUser);
-        navigate("/");
+        // navigate("/");
       })
       .catch((error) => {
         console.log("error", error.message);
