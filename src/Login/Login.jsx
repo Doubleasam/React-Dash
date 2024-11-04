@@ -20,8 +20,10 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         navigate("/");
-        dispatch(is_logged_in())
-        console.log(loggedUser);
+        dispatch(is_logged_in());
+        console.log("loggedUser: ", loggedUser);
+        console.log("loggedUser?.email: ", loggedUser?.email);
+        dispatch(set_email(loggedUser?.email));
         setUser(loggedUser);
       })
       .catch((error) => {
